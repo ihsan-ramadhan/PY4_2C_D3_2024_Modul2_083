@@ -88,6 +88,19 @@ class _CounterViewState extends State<CounterView> {
     );
   }
 
+  String _getGreeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 11) {
+      return 'Selamat Pagi,';
+    } else if (hour < 15) {
+      return 'Selamat Siang,';
+    } else if (hour < 18) {
+      return 'Selamat Sore,';
+    } else {
+      return 'Selamat Malam,';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,6 +119,32 @@ class _CounterViewState extends State<CounterView> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.blue.shade100),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      _getGreeting(),
+                      style: TextStyle(fontSize: 16, color: Colors.blue[800]),
+                    ),
+                    Text(
+                      widget.username,
+                      style: const TextStyle(
+                        fontSize: 24, 
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
               const Text("Total Hitungan Anda:"),
               Text('${_controller.value}', style: const TextStyle(fontSize: 40)),
 
